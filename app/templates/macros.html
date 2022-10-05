@@ -1,0 +1,21 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% macro render_todo(todo, delete_form, update_form) %}
+<div class="container">
+    <li class="list-group-item " >
+        <span class="badge">{{ todo.to_dict().done }}</span>
+        <div class="list-group-item">
+            <h3 class="text-danger">Item:</h3> <h4 class="text-dark" >{{ todo.to_dict().description }} </h4>
+        
+            <ol class="text-right ">
+                <button class="bg-success">
+                    {{ wtf.quick_form(update_form, action=url_for('update', todo_id=todo.id, done=todo.to_dict().done)) }}
+                </button>
+                <button class="bg-danger">
+                {{ wtf.quick_form(delete_form, action=url_for('delete', todo_id=todo.id)) }}
+                </button>
+            </ol>
+        </div>
+    </li>
+</div>
+{% endmacro %}
